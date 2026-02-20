@@ -28,7 +28,8 @@ public class Main {
                 delete(id);
             }
             case "summary" -> {
-                summary();
+                if(n == 1) summary();
+                if(n == 3) summary(args);
             }
         }
     }
@@ -108,5 +109,26 @@ public class Main {
             throw new RuntimeException(e);
         }
         System.out.println("Total expenses: ₱" + total);
+    }
+
+    static void summary(String[] args){
+        double total = 0;
+        if(args[1].equals("--month")){
+            try(BufferedReader br = new BufferedReader(new FileReader("data.txt"))){
+                String line;
+                String month;
+                while((line = br.readLine()) != null){
+                    String[] data = line.split(",");
+                    String[] date = data[1].split("-");
+                    month = date[1];
+                    if(month.equals(args[2])){
+                        total += Double.parseDouble(data[3]);
+                    }
+                }
+            } catch(IOException e){
+                throw new RuntimeException();
+            }
+            System.out.println("Total expenses for " + args[2] + ": " + total);
+        }
     }
 }
