@@ -18,7 +18,6 @@ public class Helper {
             String[] parts = lastLine.split(",");
             return Integer.parseInt(parts[0]);
         } else {
-            System.err.println("No such file or directory");
             return 0;
         }
     }

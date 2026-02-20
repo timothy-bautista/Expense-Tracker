@@ -22,7 +22,7 @@ public class Main {
 //                delete method
             }
             case "summary" -> {
-//                summary method;
+                summary();
             }
         }
     }
@@ -65,8 +65,21 @@ public class Main {
             throw new RuntimeException(e);
         }
     }
+
     static void delete(){
     }
+
     static void summary(){
+        double total = 0;
+        try(BufferedReader br = new BufferedReader(new FileReader("data.txt"))){
+            String line;
+            while((line = br.readLine()) != null){
+                String[] data = line.split(",");
+                total += Double.parseDouble(data[3]);
+            }
+        } catch(IOException e){
+            throw new RuntimeException(e);
+        }
+        System.out.println("Total expenses: ₱" + total);
     }
 }
