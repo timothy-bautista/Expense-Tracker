@@ -19,7 +19,13 @@ public class Main {
                 list();
             }
             case "delete" -> {
-//                delete method
+                if(n != 3){
+                    System.out.println("Invalid number of arguments");
+                    return;
+                }
+
+                int id = Integer.parseInt(args[2]);
+                delete(id);
             }
             case "summary" -> {
                 summary();
@@ -66,7 +72,28 @@ public class Main {
         }
     }
 
-    static void delete(){
+    static void delete(int id){
+        File file = new File("data.txt");
+        File temp = new File("temp.txt");
+        try(BufferedReader br = new BufferedReader(new FileReader(file));
+        BufferedWriter bw = new BufferedWriter(new FileWriter(temp))){
+            String line;
+
+            while((line = br.readLine()) != null){
+                String[] data = line.split(",");
+                if(data[0].equals(id+"")){
+                    continue;
+                }
+                bw.write(line + System.lineSeparator());
+            }
+            System.out.println("Expense deleted successfully");
+        } catch(IOException e){
+            throw new RuntimeException(e);
+        }
+
+        if(file.delete()){
+            temp.renameTo(file);
+        }
     }
 
     static void summary(){
