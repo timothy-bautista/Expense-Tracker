@@ -6,7 +6,7 @@ public class Helper {
     static int idGenerator(){
         String currentLine;
         String lastLine = null;
-        try(BufferedReader br = new BufferedReader(new FileReader("data.txt"))){
+        try(BufferedReader br = new BufferedReader(new FileReader("data.csv"))){
             while((currentLine = br.readLine()) != null){
                 lastLine = currentLine;
             }
