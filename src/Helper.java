@@ -16,9 +16,9 @@ public class Helper {
 
         if(lastLine != null){
             String[] parts = lastLine.split(",");
-            return Integer.parseInt(parts[0]);
+            return Integer.parseInt(parts[0])+1;
         } else {
-            return 0;
+            return 1;
         }
     }
 }
