@@ -7,7 +7,7 @@ public class Expense {
     private double amount;
 
     public Expense(String description, double amount) {
-        this.id = Helper.idGenerator();
+        this.id = Helper.generateId();
         this.date = LocalDate.now().toString();
         this.description = description;
         this.amount = amount;

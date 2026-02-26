@@ -1,60 +1,54 @@
 import java.io.*;
-import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 
 public class Main {
     public static void main(String[] args){
-        parse(args, args.length);
+        List<String> list = Arrays.asList(args);
+        parse(list);
     }
 
-    static void parse(String[] args, int count){
-        if(count == 0){
-            System.out.println("Error: No command provided");
-            System.out.println("Usage: java Main <command>");
+    static void parse(List<String> list){
+        if(list.isEmpty()){
+            Helper.printFail("No command provided", "java Main <command>");
             return;
         }
 
-        switch(args[0]){
+        switch(list.getFirst()){
             case "add" -> {
-                if(count != 5){
-                    System.out.println("Error: Invalid number of arguments");
-                    System.out.println("Usage: java Main add --description <text> --amount <number>");
+                if(list.size() != 5){
+                    Helper.printFail("Invalid number of arguments", "java Main add --description <text> --amount <number>");
                     return;
                 }
 
-                Service.add(args);
+                Service.add(list);
             }
             case "list" -> {
-                if(count != 1){
-                    System.out.println("Error: Invalid number of arguments");
-                    System.out.println("Usage: java Main list");
+                if(list.size() != 1){
+                    Helper.printFail("Invalid number of arguments", "java Main list");
                     return;
                 }
 
                 Service.list();
             }
             case "delete" -> {
-                if(count != 3){
-                    System.out.println("Error: Invalid number of arguments");
-                    System.out.println("Usage: java Main delete --id <id>");
+                if(list.size() != 3){
+                    Helper.printFail("Invalid number of arguments", "java Main delete --id <id>");
                     return;
                 }
 
-                Service.delete(args);
+                Service.delete(list);
             }
             case "summary" -> {
-                if(count != 1 || count != 3){
-                    System.out.println("Error: Invalid number of arguments");
-                    System.out.println("Usage: java Main summary OR java Main summary --month <MM>");
+                if(list.size() != 1 && list.size() != 3){
+                    Helper.printFail("Invalid number of arguments", "java Main summary OR java Main summary --month <MM>");
                     return;
                 }
-                if(count == 1) Service.summary();
-                if(count == 3) Service.summary(args);
+                if(list.size() == 1) Service.summary();
+                if(list.size() == 3) Service.summary(list);
             }
             default -> {
-                System.out.println("Error: unknown command <command>");
-                System.out.println("Usage: java Main <command>");
+                Helper.printFail("unknown command <command>", "java Main <command>");
             }
         }
     }
