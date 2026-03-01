@@ -2,7 +2,7 @@
 # Expense Tracker (Java CLI)
 
 ## Project URL
-https://github.com/timothy-bautista/Expense-Tracker
+[https://github.com/timothy-bautista/Expense-Tracker](https://roadmap.sh/projects/expense-tracker)
 
 ## Overview
 A simple Java command-line app to record expenses, list them, delete by ID, and view totals (overall or by month). Data is saved in `data.csv`.
